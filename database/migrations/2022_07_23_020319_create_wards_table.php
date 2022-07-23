@@ -13,31 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('wards', function (Blueprint $table) {
             // ID para la tabla de la BDD
             $table->id();
 
             // columnas para la tabla BDD
-            $table->string('first_name', 50);
-            $table->string('last_name', 50);
-            $table->string('personal_phone', 10);
-            $table->string('address', 50);
-            $table->string('password');
+            $table->string('name', 45);
+            $table->string('location', 45);
             $table->boolean('state')->default(true);
 
-            // columnas que seran unicas para la tabla de la BDD
-            $table->string('email')->unique();
-            $table->string('username', 50)->unique();
-
             // columnas que seran podran aceptar regitros null para la tabla de la BDD
-            $table->string('home_phone', 9)->nullable();
-            $table->date('birthdate')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('description')->nullable();
 
             // columnas especiales para la tabla de la BDD
-            $table->rememberToken();
             $table->timestamps();
-            
+                        
         });
     }
 
@@ -48,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('wards');
     }
 };
