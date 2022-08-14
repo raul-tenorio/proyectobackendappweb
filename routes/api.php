@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\Account\AvatarController;
 use App\Http\Controllers\Assignment\GuardToWardController;
 use App\Http\Controllers\Assignment\PrisonerToJailController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Spaces\JailController;
 use App\Http\Controllers\Spaces\WardController;
 use App\Http\Controllers\Users\DirectorController;
@@ -95,6 +96,17 @@ Route::prefix('v1')->group(function ()
             Route::controller(PrisonerToJailController::class)->group(function () {
                 Route::get('/prisoners-and-jails', 'index');
                 Route::get('/prisoner-to-jail/{user}/{jail}', 'assign');
+            });
+        });
+
+        Route::prefix('report')->group(function () {
+            Route::controller(ReportController::class)->group(function ()
+            {
+                Route::get('/', 'index');
+                Route::post('/create', 'store');
+                Route::get('/{report}', 'show');
+                Route::post('/{report}/update', 'update');
+                Route::get('/{report}/destroy', 'destroy');
             });
         });
 
